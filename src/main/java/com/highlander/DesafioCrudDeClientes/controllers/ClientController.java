@@ -18,7 +18,7 @@ public class ClientController {
     @Autowired
     private ClientService service;
 
-   @GetMapping(value = "/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<ClientDTO> findById(@PathVariable Long id) {
         ClientDTO dto = service.findById(id);
         return ResponseEntity.ok(dto);
@@ -26,7 +26,7 @@ public class ClientController {
 
     @GetMapping
     public ResponseEntity<Page<ClientDTO>> findAll(Pageable pageable) {
-       Page<ClientDTO> dto = service.findAll(pageable);
+        Page<ClientDTO> dto = service.findAll(pageable);
         return ResponseEntity.ok(dto);
     }
 

@@ -3,6 +3,7 @@ package com.highlander.DesafioCrudDeClientes.services;
 import com.highlander.DesafioCrudDeClientes.dto.ClientDTO;
 import com.highlander.DesafioCrudDeClientes.entities.Client;
 import com.highlander.DesafioCrudDeClientes.repositories.ClientRepository;
+import com.highlander.DesafioCrudDeClientes.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +18,8 @@ public class ClientService {
 
     @Transactional(readOnly = true)
     public ClientDTO findById(Long id) {
-        Client client = repository.findById(id).get();
+        Client client = repository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Resource not found"));
         return new ClientDTO(client);
     }
 

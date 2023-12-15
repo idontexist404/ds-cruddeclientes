@@ -2,6 +2,7 @@ package com.highlander.DesafioCrudDeClientes.controllers;
 
 import com.highlander.DesafioCrudDeClientes.dto.ClientDTO;
 import com.highlander.DesafioCrudDeClientes.services.ClientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,7 +32,7 @@ public class ClientController {
     }
 
     @PostMapping
-    public ResponseEntity<ClientDTO> insert(@RequestBody ClientDTO dto) {
+    public ResponseEntity<ClientDTO> insert(@Valid @RequestBody ClientDTO dto) {
         dto = service.insert(dto);
         // Good practice: the response header should have a link to the created resource
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -40,7 +41,7 @@ public class ClientController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ClientDTO> update(@PathVariable Long id, @RequestBody ClientDTO dto) {
+    public ResponseEntity<ClientDTO> update(@PathVariable Long id, @Valid @RequestBody ClientDTO dto) {
         dto = service.update(id, dto);
         return ResponseEntity.ok(dto);
     }

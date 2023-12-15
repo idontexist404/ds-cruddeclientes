@@ -1,14 +1,22 @@
 package com.highlander.DesafioCrudDeClientes.dto;
 
 import com.highlander.DesafioCrudDeClientes.entities.Client;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
 public class ClientDTO {
     private Long id;
+
+    @NotBlank(message = "Required field")
+    @Size(min = 3, message = "The field must be at least 3 characters long")
     private String name;
     private String cpf;
     private Double income;
+
+    @PastOrPresent(message = "Future dates are not allowed")
     private LocalDate birthDate;
     private Integer children;
 
